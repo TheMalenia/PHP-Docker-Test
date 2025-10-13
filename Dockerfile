@@ -1,5 +1,3 @@
-FROM php:8.2-cli
+FROM php:8.2-fpm
 WORKDIR /code
-EXPOSE 5000
 COPY . .
-CMD [ "php", "-S", "localhost:8000" ]
