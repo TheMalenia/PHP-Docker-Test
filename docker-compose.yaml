@@ -22,9 +22,18 @@ services:
   redis:
     image: "redis:7-alpine"
   db:
-    image: "mysql:8.0"
+    image: mysql:8.1
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: Hasan1383
+      MYSQL_DATABASE: blog
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:
