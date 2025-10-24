@@ -40,9 +40,13 @@ final class Services
             return new Jwt(getenv('JWT_SECRET') ?: 'dev-secret-change-me');
         });
 
-        // PSR logger
+        // PSR logger (singleton)
         $container->set(LoggerInterface::class, function($c) {
-            return LoggerFactory::create();
+            static $logger = null;
+            if ($logger === null) {
+                $logger = LoggerFactory::create();
+            }
+            return $logger;
         });
 
         $container->set(PostApiController::class, function($c) {
@@ -59,15 +63,6 @@ final class Services
                 $c->get(Jwt::class),
                 $c->get(LoggerInterface::class)
             );
-        });
-
-        // Web controllers (if used in other entrypoints)
-        $container->set(PostController::class, function($c) {
-            return new PostController($c->get(PostRepositoryInterface::class), $c->get(LoggerInterface::class));
-        });
-
-        $container->set(UserController::class, function($c) {
-            return new UserController($c->get(UserRepositoryInterface::class), $c->get(LoggerInterface::class));
         });
     }
 
