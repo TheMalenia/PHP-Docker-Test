@@ -2,20 +2,22 @@ version: "3.9"
 services:
   web:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
     volumes:
-      - .:/code
+      - ../:/code
     expose:
       - "9000"
+    env_file:
+      - ../.env
 
   nginx:
     image: nginx:alpine
     ports:
       - "8000:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - .:/code
+      - ../nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../:/code
     depends_on:
       - web
 
@@ -25,7 +27,7 @@ services:
     image: mysql:8.1
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Hasan1383
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: blog
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
@@ -33,7 +35,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql 
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../app/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:

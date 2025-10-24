@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php ?>
+<?php // session started in public/index.php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 <body>
     <h1>Login</h1>
     <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-    <form method="POST" action="index.php?page=login">
+    <form method="POST" action="/login">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <br>

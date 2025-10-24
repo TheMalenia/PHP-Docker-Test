@@ -8,7 +8,7 @@
 <body>
     <h1>Create Post</h1>
     <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-    <form method="POST" action="index.php?page=create_post">
+    <form method="POST" action="/create_post">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
         <br>

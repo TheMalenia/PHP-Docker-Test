@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php // session started in public/index.php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@
 <body>
     <h1>Register</h1>
     <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-    <form method="POST" action="index.php?page=register">
+    <form method="POST" action="/register">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <br>
@@ -18,6 +18,6 @@
         <br>
         <button type="submit">Register</button>
     </form>
-    <p>Already have an account? <a href="index.php?page=login">Login here</a></p>
+    <p>Already have an account? <a href="/login">Login here</a></p>
 </body>
 </html>
