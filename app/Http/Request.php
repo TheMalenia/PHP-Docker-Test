@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http;
 
-final class Request
+final class زRequest
 {
     private array $server;
     private array $get;

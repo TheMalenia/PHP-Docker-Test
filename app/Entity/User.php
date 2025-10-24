@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -16,7 +17,16 @@ final class User
         $this->passwordHash = $passwordHash;
     }
 
-    public function getId(): int { return $this->id; }
-    public function getEmail(): string { return $this->email; }
-    public function getPasswordHash(): string { return $this->passwordHash; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+    public function getPasswordHash(): string
+    {
+        return $this->passwordHash;
+    }
 }

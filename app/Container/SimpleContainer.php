@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Container;
@@ -7,8 +8,12 @@ use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
 
-class NotFoundException extends \Exception implements NotFoundExceptionInterface {}
-class ContainerException extends \Exception implements ContainerExceptionInterface {}
+class NotFoundException extends \Exception implements NotFoundExceptionInterface
+{
+}
+class ContainerException extends \Exception implements ContainerExceptionInterface
+{
+}
 
 final class SimpleContainer implements ContainerInterface
 {

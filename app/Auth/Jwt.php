@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Auth;
@@ -37,23 +38,35 @@ final class Jwt
     public function validate(string $token): ?array
     {
         $parts = explode('.', $token);
-        if (count($parts) !== 3) return null;
+        if (count($parts) !== 3) {
+            return null;
+        }
         [$h64, $p64, $s64] = $parts;
 
         $header = json_decode($this->base64UrlDecode($h64), true);
         $payload = json_decode($this->base64UrlDecode($p64), true);
         $signature = $this->base64UrlDecode($s64);
 
-        if (!is_array($payload) || !is_array($header)) return null;
-        if (($header['alg'] ?? '') !== 'HS256') return null;
+        if (!is_array($payload) || !is_array($header)) {
+            return null;
+        }
+        if (($header['alg'] ?? '') !== 'HS256') {
+            return null;
+        }
 
         $signingInput = $h64 . '.' . $p64;
         $expected = $this->sign($signingInput);
-        if (!hash_equals($expected, $signature)) return null;
+        if (!hash_equals($expected, $signature)) {
+            return null;
+        }
 
         $now = time();
-        if (isset($payload['exp']) && $payload['exp'] < $now) return null;
-        if (isset($payload['nbf']) && $payload['nbf'] > $now) return null;
+        if (isset($payload['exp']) && $payload['exp'] < $now) {
+            return null;
+        }
+        if (isset($payload['nbf']) && $payload['nbf'] > $now) {
+            return null;
+        }
 
         return $payload;
     }

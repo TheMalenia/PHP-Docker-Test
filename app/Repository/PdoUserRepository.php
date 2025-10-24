@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -48,7 +49,9 @@ final class PdoUserRepository implements UserRepositoryInterface
             $stmt = $this->db->prepare('SELECT id, email, password FROM users WHERE email = ?');
             $stmt->execute([$email]);
             $r = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($r === false) return null;
+            if ($r === false) {
+                return null;
+            }
             return new UserEntity((int)$r['id'], $r['email'], $r['password']);
         } catch (Throwable $e) {
             $this->logger->error('Failed to find user by email', ['email' => $email, 'exception' => $e->getMessage()]);

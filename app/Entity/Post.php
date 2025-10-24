@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -20,11 +21,26 @@ final class Post
         $this->createdAt = $createdAt;
     }
 
-    public function getId(): int { return $this->id; }
-    public function getTitle(): string { return $this->title; }
-    public function getContent(): string { return $this->content; }
-    public function getUserId(): int { return $this->userId; }
-    public function getCreatedAt(): string { return $this->createdAt; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
 
     public function excerpt(int $len = 200): string
     {

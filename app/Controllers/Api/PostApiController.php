@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controllers\Api;
@@ -27,7 +28,7 @@ final class PostApiController
     {
         $this->logger->info('Fetching all posts via API');
         $posts = $this->repo->getAllPosts();
-        Response::json(array_map(function($p){
+        Response::json(array_map(function ($p) {
             return [
                 'id' => $p->getId(),
                 'title' => $p->getTitle(),

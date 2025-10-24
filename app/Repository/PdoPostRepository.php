@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -24,7 +25,7 @@ final class PdoPostRepository implements PostRepositoryInterface
         try {
             $stmt = $this->db->query('SELECT * FROM posts ORDER BY created_at DESC');
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-            return array_map(function(array $r) {
+            return array_map(function (array $r) {
                 return new PostEntity((int)$r['id'], $r['title'], $r['content'], (int)$r['user_id'], $r['created_at']);
             }, $rows);
         } catch (Throwable $e) {
@@ -39,7 +40,9 @@ final class PdoPostRepository implements PostRepositoryInterface
             $stmt = $this->db->prepare('SELECT * FROM posts WHERE id = ?');
             $stmt->execute([$id]);
             $r = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($r === false) return null;
+            if ($r === false) {
+                return null;
+            }
             return new PostEntity((int)$r['id'], $r['title'], $r['content'], (int)$r['user_id'], $r['created_at']);
         } catch (Throwable $e) {
             $this->logger->error('Failed to fetch post', ['id' => $id, 'exception' => $e->getMessage()]);

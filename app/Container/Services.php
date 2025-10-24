@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Container;
@@ -20,7 +21,7 @@ final class Services
 {
     public static function register($container): void
     {
-        $container->set(PdoFactory::class, function() {
+        $container->set(PdoFactory::class, function () {
             static $instance = null;
             if ($instance === null) {
                 $instance = PdoFactory::createFromEnv();
@@ -28,20 +29,20 @@ final class Services
             return $instance;
         });
 
-        $container->set(PostRepositoryInterface::class, function($c) {
+        $container->set(PostRepositoryInterface::class, function ($c) {
             return new PdoPostRepository($c->get(PdoFactory::class), $c->get(LoggerInterface::class));
         });
 
-        $container->set(UserRepositoryInterface::class, function($c) {
+        $container->set(UserRepositoryInterface::class, function ($c) {
             return new PdoUserRepository($c->get(PdoFactory::class), $c->get(LoggerInterface::class));
         });
 
-        $container->set(Jwt::class, function($c) {
+        $container->set(Jwt::class, function ($c) {
             return new Jwt(getenv('JWT_SECRET') ?: 'dev-secret-change-me');
         });
 
         // PSR logger (singleton)
-        $container->set(LoggerInterface::class, function($c) {
+        $container->set(LoggerInterface::class, function ($c) {
             static $logger = null;
             if ($logger === null) {
                 $logger = LoggerFactory::create();
@@ -49,7 +50,7 @@ final class Services
             return $logger;
         });
 
-        $container->set(PostApiController::class, function($c) {
+        $container->set(PostApiController::class, function ($c) {
             return new PostApiController(
                 $c->get(PostRepositoryInterface::class),
                 $c->get(Jwt::class),
@@ -57,7 +58,7 @@ final class Services
             );
         });
 
-        $container->set(UserApiController::class, function($c) {
+        $container->set(UserApiController::class, function ($c) {
             return new UserApiController(
                 $c->get(UserRepositoryInterface::class),
                 $c->get(Jwt::class),
