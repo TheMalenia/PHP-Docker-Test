@@ -41,9 +41,4 @@ final class Post
     {
         return $this->createdAt;
     }
-
-    public function excerpt(int $len = 200): string
-    {
-        return mb_substr($this->content, 0, $len) . (mb_strlen($this->content) > $len ? '…' : '');
-    }
 }
