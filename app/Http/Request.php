@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http;
 
-final class زRequest
+final class Request
 {
     private array $server;
     private array $get;
