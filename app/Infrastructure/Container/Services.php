@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Container;
 
+use App\Application\User\LoginUserService;
+use App\Application\User\RegisterUserService;
 use App\Infrastructure\Auth\Jwt;
 use App\Infrastructure\Database\PdoFactory;
 use App\Domain\Repository\PostRepositoryInterface;
@@ -64,8 +66,8 @@ final class Services
 
         $container->set(UserApiController::class, function ($c) {
             return new UserApiController(
-                $c->get(UserRepositoryInterface::class),
-                $c->get(Jwt::class),
+                $c->get(RegisterUserService::class),
+                $c->get(LoginUserService::class),
                 $c->get(LoggerInterface::class)
             );
         });
@@ -90,6 +92,19 @@ final class Services
         $container->set(CreatePostService::class, function($c) {
             return new CreatePostService(
                 $c->get(PostRepositoryInterface::class)
+            );
+        });
+
+        $container->set(LoginUserService::class, function($c) {
+            return new LoginUserService(
+                $c->get(UserRepositoryInterface::class),
+                $c->get(Jwt::class)
+            );
+        });
+
+        $container->set(RegisterUserService::class, function($c) {
+            return new RegisterUserService(
+                $c->get(UserRepositoryInterface::class)
             );
         });
 

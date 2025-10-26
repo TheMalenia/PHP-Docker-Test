@@ -8,6 +8,7 @@ use App\Application\User\RegisterUserService;
 use App\Application\User\LoginUserService;
 //use App\Domain\Exception\UserAlreadyExistsException;
 //use App\Domain\Exception\InvalidCredentialsException;
+use App\Infrastructure\Auth\Jwt;
 use App\Presentation\Http\Request;
 use App\Presentation\Http\Response;
 use Psr\Log\LoggerInterface;
