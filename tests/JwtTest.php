@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
-use App\Auth\Jwt;
+use App\Infrastructure\Auth\Jwt;
 
 final class JwtTest extends TestCase
 {

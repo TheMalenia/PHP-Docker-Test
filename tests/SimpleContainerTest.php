@@ -4,8 +4,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
-use App\Container\SimpleContainer;
-use App\Container\NotFoundException;
+use App\Infrastructure\Container\SimpleContainer;
+use App\Infrastructure\Container\NotFoundException;
 
 final class SimpleContainerTest extends TestCase
 {
