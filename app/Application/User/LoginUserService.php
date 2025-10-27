@@ -6,13 +6,13 @@ namespace App\Application\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
 //use App\Domain\Exception\InvalidCredentialsException;
-use App\Infrastructure\Auth\Jwt;
+use App\Infrastructure\Auth\JwtInterface;
 
 final class LoginUserService
 {
     public function __construct(
         private UserRepositoryInterface $repo,
-        private Jwt $jwt
+        private JwtInterface $jwt
     ) {}
 
     public function execute(string $email, string $password): string

@@ -10,7 +10,7 @@ use App\Application\Post\CreatePostService;
 //use App\Domain\Exception\PostNotFoundException;
 use App\Presentation\Http\Request;
 use App\Presentation\Http\Response;
-use App\Infrastructure\Auth\Jwt;
+use App\Infrastructure\Auth\JwtInterface;
 use Psr\Log\LoggerInterface;
 use InvalidArgumentException;
 
@@ -20,7 +20,7 @@ final class PostApiController
         private GetAllPostsService $getAllPosts,
         private GetPostByIdService $getPostById,
         private CreatePostService $createPost,
-        private Jwt $jwt,
+        private JwtInterface $jwt,
         private LoggerInterface $logger
     ) {}
 

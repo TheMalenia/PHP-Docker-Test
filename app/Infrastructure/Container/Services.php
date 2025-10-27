@@ -7,6 +7,7 @@ namespace App\Infrastructure\Container;
 use App\Application\User\LoginUserService;
 use App\Application\User\RegisterUserService;
 use App\Infrastructure\Auth\Jwt;
+use App\Infrastructure\Auth\JwtInterface;
 use App\Infrastructure\Database\PdoFactory;
 use App\Domain\Repository\PostRepositoryInterface;
 use App\Domain\Repository\UserRepositoryInterface;
@@ -41,7 +42,9 @@ final class Services
             return new PdoUserRepository($c->get(PdoFactory::class), $c->get(LoggerInterface::class));
         });
 
-        $container->set(Jwt::class, function ($c) {
+        // Register the Jwt implementation under the JwtInterface so callers
+        // can depend on the interface and be mocked in tests.
+        $container->set(JwtInterface::class, function ($c) {
             return new Jwt(getenv('JWT_SECRET') ?: 'dev-secret-change-me');
         });
 
@@ -59,7 +62,7 @@ final class Services
             $c->get(GetAllPostsService::class),
             $c->get(GetPostByIdService::class),
             $c->get(CreatePostService::class),
-            $c->get(Jwt::class),
+            $c->get(JwtInterface::class),
             $c->get(LoggerInterface::class)
         )
         );
@@ -98,7 +101,7 @@ final class Services
         $container->set(LoginUserService::class, function($c) {
             return new LoginUserService(
                 $c->get(UserRepositoryInterface::class),
-                $c->get(Jwt::class)
+                $c->get(JwtInterface::class)
             );
         });
 

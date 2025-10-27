@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Auth;
 
-final class Jwt
+final class Jwt implements JwtInterface
 {
     private string $secret;
     private int $ttl; // seconds
