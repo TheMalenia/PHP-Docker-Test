@@ -13,7 +13,8 @@ final class LoginUserService
     public function __construct(
         private UserRepositoryInterface $repo,
         private JwtInterface $jwt
-    ) {}
+    ) {
+    }
 
     public function execute(string $email, string $password): string
     {
@@ -22,9 +23,9 @@ final class LoginUserService
         }
 
         $user = $this->repo->findUserByEmail($email);
-//        if (!$user || !password_verify($password, $user->getPasswordHash())) {
-//            throw new InvalidCredentialsException("Invalid credentials.");
-//        }
+        //        if (!$user || !password_verify($password, $user->getPasswordHash())) {
+        //            throw new InvalidCredentialsException("Invalid credentials.");
+        //        }
 
         return $this->jwt->generate([
             'sub' => $user->getId(),

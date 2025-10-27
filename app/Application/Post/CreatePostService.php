@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\Post;
@@ -10,7 +11,8 @@ final class CreatePostService
 {
     public function __construct(
         private PostRepositoryInterface $posts
-    ) {}
+    ) {
+    }
 
     public function execute(string $title, string $content, int $userId): bool
     {

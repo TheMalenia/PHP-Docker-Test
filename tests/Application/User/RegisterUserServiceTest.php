@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -19,7 +20,7 @@ final class RegisterUserServiceTest extends TestCase
             ->method('createUser')
             ->with(
                 $this->equalTo($email),
-                $this->callback(fn($hash) => password_verify($password, $hash))
+                $this->callback(fn ($hash) => password_verify($password, $hash))
             )
             ->willReturn(true);
 

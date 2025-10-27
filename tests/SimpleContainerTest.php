@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -22,7 +23,7 @@ final class SimpleContainerTest extends TestCase
     {
         $c = new SimpleContainer();
 
-        $c->set('obj', function($container) {
+        $c->set('obj', function ($container) {
             $o = new stdClass();
             $o->time = microtime(true);
             return $o;
@@ -31,8 +32,8 @@ final class SimpleContainerTest extends TestCase
         $a = $c->get('obj');
         $b = $c->get('obj');
 
-    $this->assertSame($a, $b);
-    $this->assertTrue(property_exists($a, 'time'));
+        $this->assertSame($a, $b);
+        $this->assertTrue(property_exists($a, 'time'));
     }
 
     public function testGetMissingThrows(): void

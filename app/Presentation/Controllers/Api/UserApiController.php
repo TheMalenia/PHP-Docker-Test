@@ -19,7 +19,8 @@ final class UserApiController
         private RegisterUserService $registerUser,
         private LoginUserService $loginUser,
         private LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     // POST /api/register
     public function register(Request $request): void
@@ -31,8 +32,8 @@ final class UserApiController
             $this->logger->info('User registered', ['email' => $data['email']]);
             Response::json(['status' => 'created'], 201);
 
-//        } catch (UserAlreadyExistsException) {
-//            Response::json(['error' => 'User already exists'], 409);
+            //        } catch (UserAlreadyExistsException) {
+            //            Response::json(['error' => 'User already exists'], 409);
         } catch (\InvalidArgumentException) {
             Response::json(['error' => 'Invalid input'], 422);
         } catch (\Throwable $e) {
@@ -51,8 +52,8 @@ final class UserApiController
             $this->logger->info('User logged in', ['email' => $data['email']]);
             Response::json(['status' => 'ok', 'token' => $token], 200);
 
-//        } catch (InvalidCredentialsException) {
-//            Response::json(['error' => 'Invalid credentials'], 401);
+            //        } catch (InvalidCredentialsException) {
+            //            Response::json(['error' => 'Invalid credentials'], 401);
         } catch (\InvalidArgumentException) {
             Response::json(['error' => 'Invalid input'], 422);
         } catch (\Throwable $e) {

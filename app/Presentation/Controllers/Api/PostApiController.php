@@ -22,7 +22,8 @@ final class PostApiController
         private CreatePostService $createPost,
         private JwtInterface $jwt,
         private LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     // GET /api/posts
     public function index(Request $request): void
@@ -31,7 +32,7 @@ final class PostApiController
 
         $posts = $this->getAllPosts->execute();
 
-        $result = array_map(fn($p) => [
+        $result = array_map(fn ($p) => [
             'id'         => $p->getId(),
             'title'      => $p->getTitle(),
             'content'    => $p->getContent(),
@@ -47,13 +48,13 @@ final class PostApiController
     {
         $this->logger->info('Fetching post', ['id' => $id]);
 
-//        try {
-            $post = $this->getPostById->execute($id);
-//        } catch (PostNotFoundException) {
-//            $this->logger->warning('Post not found', ['id' => $id]);
-//            Response::json(['error' => 'Not found'], 404);
-//            return;
-//        }
+        //        try {
+        $post = $this->getPostById->execute($id);
+        //        } catch (PostNotFoundException) {
+        //            $this->logger->warning('Post not found', ['id' => $id]);
+        //            Response::json(['error' => 'Not found'], 404);
+        //            return;
+        //        }
 
         Response::json([
             'id'         => $post->getId(),

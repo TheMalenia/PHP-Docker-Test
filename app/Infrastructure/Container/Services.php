@@ -57,7 +57,9 @@ final class Services
             return $logger;
         });
 
-        $container->set(PostApiController::class, fn($c) =>
+        $container->set(
+            PostApiController::class,
+            fn ($c) =>
         new PostApiController(
             $c->get(GetAllPostsService::class),
             $c->get(GetPostByIdService::class),
@@ -75,37 +77,37 @@ final class Services
             );
         });
 
-        $container->set(Router::class, function($c) {
+        $container->set(Router::class, function ($c) {
             $routesFile = __DIR__ . '/../../Presentation/Routes/routes.php';
             return new Router($routesFile, $c);
         });
 
-        $container->set(GetAllPostsService::class, function($c) {
+        $container->set(GetAllPostsService::class, function ($c) {
             return new GetAllPostsService(
                 $c->get(PostRepositoryInterface::class)
             );
         });
 
-        $container->set(GetPostByIdService::class, function($c) {
+        $container->set(GetPostByIdService::class, function ($c) {
             return new GetPostByIdService(
                 $c->get(PostRepositoryInterface::class)
             );
         });
 
-        $container->set(CreatePostService::class, function($c) {
+        $container->set(CreatePostService::class, function ($c) {
             return new CreatePostService(
                 $c->get(PostRepositoryInterface::class)
             );
         });
 
-        $container->set(LoginUserService::class, function($c) {
+        $container->set(LoginUserService::class, function ($c) {
             return new LoginUserService(
                 $c->get(UserRepositoryInterface::class),
                 $c->get(JwtInterface::class)
             );
         });
 
-        $container->set(RegisterUserService::class, function($c) {
+        $container->set(RegisterUserService::class, function ($c) {
             return new RegisterUserService(
                 $c->get(UserRepositoryInterface::class)
             );
