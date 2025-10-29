@@ -42,8 +42,7 @@ final class Services
             return new PdoUserRepository($c->get(PdoFactory::class), $c->get(LoggerInterface::class));
         });
 
-        // Register the Jwt implementation under the JwtInterface so callers
-        // can depend on the interface and be mocked in tests.
+
         $container->set(JwtInterface::class, function ($c) {
             return new Jwt(getenv('JWT_SECRET') ?: 'dev-secret-change-me');
         });
