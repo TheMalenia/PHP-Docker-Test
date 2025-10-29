@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
+namespace Infrastructure\Container;
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use PHPUnit\Framework\TestCase;
-use App\Infrastructure\Container\SimpleContainer;
 use App\Infrastructure\Container\NotFoundException;
+use App\Infrastructure\Container\SimpleContainer;
+use PHPUnit\Framework\TestCase;
 
 final class SimpleContainerTest extends TestCase
 {
